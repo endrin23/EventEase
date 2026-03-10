@@ -1,5 +1,26 @@
-﻿<h3>EventCard</h3>
+@using EventEase.Models
+
+<div class="card m-2">
+
+    <div class="card-body">
+
+        <h4>@Event.EventName</h4>
+
+        <p>Date: @Event.EventDate.ToShortDateString()</p>
+
+        <p>Location: @Event.Location</p>
+
+        <NavLink href="/eventdetails/@Event.Id">
+            View Details
+        </NavLink>
+
+    </div>
+
+</div>
 
 @code {
+
+    [Parameter]
+    public EventModel Event { get; set; }
 
 }
