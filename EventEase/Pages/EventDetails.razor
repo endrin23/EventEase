@@ -1,5 +1,42 @@
-﻿<h3>EventDetails</h3>
+@page "/eventdetails/{Id:int}"
+@using EventEase.Models
 
-@code {
+<h2>Event Details</h2>
+
+@if (selectedEvent != null)
+{
+    <h3>@selectedEvent.EventName</h3>
+
+    <p>Date: @selectedEvent.EventDate</p>
+
+    <p>Location: @selectedEvent.Location</p>
+
+    <NavLink href="/register/@selectedEvent.Id">
+        Register
+    </NavLink>
+}
+
+@code{
+
+[Parameter]
+public int Id {get;set;}
+
+EventModel? selectedEvent;
+
+protected override void OnInitialized()
+{
+    var events = GetEvents();
+
+    selectedEvent = events.FirstOrDefault(e => e.Id == Id);
+}
+
+List<EventModel> GetEvents()
+{
+    return new()
+    {
+        new EventModel{Id=1,EventName="Tech Conference",EventDate=DateTime.Now,Location="New York"},
+        new EventModel{Id=2,EventName="Startup Meetup",EventDate=DateTime.Now,Location="London"}
+    };
+}
 
 }
